@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>Classroom Manager App</title>
+<!-- bower:css -->
+<link rel="stylesheet" href="bower_components/bulma/css/bulma.css" />
+<link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+<!-- endbower -->
+
+<!-- inject:css -->
+<link rel="stylesheet" href="css/style.css">
+<!-- endinject -->
+</head>
+<body>
+<!-- Header Start -->
+<section class="hero is-primary is-bold">
+	<div class="hero-head">
+		<div class="container">
+			<div class="tabs is-medium">
+			  <ul>
+			  	<li class="is-inactive">Classroom Manager</li>
+			    <li><a ui-sref="dashboard">Dashboard</a></li>
+			    <li><a ui-sref="student.grid">Students</a></li>
+			    <li><a ui-sref="project.grid">Projects</a></li>
+			  </ul>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Header End -->
+
+<!-- UI View Start -->
+<section class="section">
+	<div class="container is-fluid">
+		<div ui-view></div>
+	</div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Classroom Manager</strong> by <a href="http://github.com/dng-vcnt">Vincent Duong</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+      </p>
+      <p>
+        <a class="icon" href="https://github.com/jgthms/bulma">
+          <i class="fa fa-github"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<!-- UI View End -->
+ 
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<!-- endbower -->
+<!-- inject:js -->
+<script src="app.js"></script>
+<script src="dashboard/dashboard.controller.js"></script>
+<script src="projects/project.detail.controller.js"></script>
+<script src="projects/project.grid.controller.js"></script>
+<script src="students/student.detail.controller.js"></script>
+<script src="students/student.grid.controller.js"></script>
+<!-- endinject -->
+</body>
+</html>
