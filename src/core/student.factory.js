@@ -16,6 +16,7 @@
 
         ////////////////
 
+        // Gets list of student objects from database
         function getStudents() {
         	var defer = $q.defer();
         	$http.get(apiUrl + 'students').then (

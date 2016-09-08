@@ -16,6 +16,7 @@
 
         ////////////////
 
+        // Gets list of project objects
         function getProjects() {
             var defer = $q.defer();
             $http.get(apiUrl + 'projects').then (

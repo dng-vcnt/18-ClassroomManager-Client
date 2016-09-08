@@ -6,44 +6,74 @@
         .controller('DashboardController', DashboardController);
 
     DashboardController.$inject = [
-                                    '$stateParams', 
-                                    'studentFactory'
-                                  ];
+                                    'studentFactory', 
+                                    'projectFactory', 
+                                    'assignmentFactory', 
+                                    'toastr'
+                                    ];
 
     /* @ngInject */
-    function DashboardController($stateParams, studentFactory) {
+    function DashboardController(studentFactory, projectFactory, assignmentFactory, toastr) {
         var vm = this;
         vm.title = 'DashboardController';
 
-        // variables
-        vm.studentCount = 0;
-        vm.projectCount = 0;
+        // variables        
         vm.assignmentCount = 0;
+        vm.projectCount = 0;
+        vm.studentCount = 0;
 
         // functions
-        vm.getAssignments = getAssignments;
-        vm.getStudents = getStudents;
-        vm.getProjects = getProjects;
+        vm.getAssignmentCount = getAssignmentCount;
+        vm.getProjectCount = getProjectCount;
+        vm.getStudentCount = getStudentCount;
 
         activate();
 
         ////////////////
 
         function activate() {
-            getStudents();
+            getStudentCount();
+            getAssignmentCount();
+            getProjectCount();
         }
 
-        function getStudents() {
-            studentFactory.getStudents().then (
+        // Retrieve the nummber of assignments in the database
+        function getAssignmentCount() {
+            assignmentFactory.getAssignments().then (
                 function(data) {
-                    console.log(data);
-                    vm.studentCount = data;
+                    vm.assignmentCount = data.length;
                 },
                 function(error) {
+                    toastr.error(error.status, error.statusText);
                     console.log(error);
                 }
             );
         }
 
+        // Retrieve the number of projects in the database
+        function getProjectCount() {
+            projectFactory.getProjects().then (
+                function(data) {
+                    vm.projectCount = data.length;
+                },
+                function(error) {
+                    toastr.error(error.status, error.statusText);
+                    console.log(error);
+                }
+            );
+        }
+
+        // Retrieve the number of students in the database
+        function getStudentCount() {
+            studentFactory.getStudents().then (
+                function(data) {
+                    vm.studentCount = data.length;
+                },
+                function(error) {
+                    toastr.error(error.status, error.statusText);
+                    console.log(error);
+                }
+            );
+        }
     }
 })();
