@@ -44,7 +44,7 @@
 									controller: 'StudentGridController as studentGrid'
 						})
 						.state('student.detail', {
-									url: '/detail?',
+									url: '/detail?studentId',
 									templateUrl: '/students/student.detail.html',
 									controller: 'StudentDetailController as studentDetail'
 						})

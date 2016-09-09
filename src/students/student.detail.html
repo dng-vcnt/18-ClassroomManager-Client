@@ -1,12 +1,17 @@
 <div class="tile is-ancestor">
-  <div class="tile is-4 is-vertical is-parent">
-    <div class="tile is-child notification is-primary box">
+  <div class="tile is-5 is-vertical is-parent">
+
+    <!-- Select a Project Tile -->
+    <div class="tile is-child notification is-primary box is-mobile">
       <p class="title">Select a Project</p>
         <div class="control is-grouped">
           <div class="control">
             <span class="select">
   						<select>
-  							<option>Project Name Name</option>
+  							<option>Select a Project</option>
+                <option ng-repeat="project in studentDetail.projectsList">
+                  {{project.name}}
+                </option>
   						</select>
   					</span>
           </div>
@@ -15,29 +20,46 @@
           </div>
         </div>
     </div>
+
+    <!-- Edit Student Tile -->
     <div class="tile is-child box">
       <p class="title">Edit Student</p>
-      <div class="control">
-        <label class="label">First Name</label>
-        <input class="input is-primary" type="text">
-      </div>
-      <div class="control">
-        <label class="label">Last Name</label>
-        <input class="input is-primary" type="text">
-      </div>
-      <div class="control">
-        <label class="label">Email Address</label>
-        <input class="input is-primary" type="text">
-      </div>
-      <div class="control">
-        <label class="label">Telephone</label>
-        <input class="input is-primary" type="text">
-      </div>
-      <div class="control">
-      <button class="button is-primary is-pulled-right">Save</button>
-      </div>
+      <form ng-submit="studentDetail.saveUpdate(studentDetail.student)">
+        <div class="control">
+          <label class="label">First Name</label>
+          <input class="input is-primary" type="text" 
+                 ng-model="studentDetail.student.firstName"
+                 required>
+        </div>
+        <div class="control">
+          <label class="label">Last Name</label>
+          <input class="input is-primary" type="text" 
+                 ng-model="studentDetail.student.lastName"
+                 required>
+        </div>
+        <div class="control">
+          <label class="label">Email Address</label>
+          <input class="input is-primary" type="text" 
+                 ng-model="studentDetail.student.emailAddress"
+                 required>
+        </div>
+        <div class="control">
+          <label class="label">Telephone</label>
+          <input class="input is-primary" type="text" 
+                 ng-model="studentDetail.student.telephone"
+                 required>
+        </div>
+        <div class="control">
+          <button type="submit" class="button is-primary is-pulled-right">
+            Save
+          </button>
+        </div>
+      </form>
+      <br>
     </div>
   </div>
+
+  <!-- List of Assignment Tile -->
   <div class="tile is-parent">
     <div class="tile is-child box">
       <p class="title">Assignments</p>
@@ -49,8 +71,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Project Name</td>
+            <tr ng-repeat="assignment in studentDetail.student.assignments">
+              <td>{{assignment.projects.name}}</td>
               <td>F+</td>
             </tr>
           </tbody>

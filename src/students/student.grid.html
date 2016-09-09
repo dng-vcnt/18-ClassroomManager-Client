@@ -19,14 +19,18 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>name</td>
-							<td>0</td>
+						<tr ng-repeat="student in studentGrid.students">
+							<td>{{student.firstName}} {{student.lastName}}</td>
+							<td>{{student.assignments.length}}</td>
 							<td>
-								<button class="button is-info">Edit</button>
+								<button class="button is-info"
+												ui-sref="student.detail({studentId: student.studentId})">
+												Edit
+								</button>
 							</td>
 							<td>
-								<button class="button is-danger">Delete</button>
+								<button class="button is-danger"
+												ng-click="studentGrid.deleteStudent(student)">Delete</button>
 							</td>
 						</tr>
 					</tbody>
