@@ -29,7 +29,7 @@
 									controller: 'ProjectGridController as projectGrid'
 						})
 						.state('project.detail', {
-									url: '/detail?',
+									url: '/detail?projectId',
 									templateUrl: '/projects/project.detail.html',
 									controller: 'ProjectDetailController as projectDetail'
 						})

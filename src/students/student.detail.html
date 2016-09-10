@@ -1,53 +1,47 @@
 <div class="tile is-ancestor">
   <div class="tile is-5 is-vertical is-parent">
-
     <!-- Select a Project Tile -->
     <div class="tile is-child notification is-primary box is-mobile">
       <p class="title">Select a Project</p>
-        <div class="control is-grouped">
-          <div class="control">
-            <span class="select">
-  						<select>
-  							<option>Select a Project</option>
-                <option ng-repeat="project in studentDetail.projectsList">
+      <div class="control is-grouped">
+        <div class="control">
+          <span class="select">
+              <select ng-model="projToAssignId">
+                <option value="">Projects...</option>
+                <option ng-repeat="project in studentDetail.projectsList"
+                        value="{{project.projectId}}">
                   {{project.name}}
                 </option>
-  						</select>
-  					</span>
-          </div>
-          <div class="control">
-            <a class="button is-white is-outlined">Assign</a>
-          </div>
+              </select>
+            </span>
         </div>
+        <div class="control">
+          <button class="button is-white is-outlined" ng-click="studentDetail.assignProject(projToAssignId,
+                                                          studentDetail.student.studentId)">
+            Assign
+          </button>
+        </div>
+      </div>
     </div>
-
     <!-- Edit Student Tile -->
     <div class="tile is-child box">
       <p class="title">Edit Student</p>
       <form ng-submit="studentDetail.saveUpdate(studentDetail.student)">
         <div class="control">
           <label class="label">First Name</label>
-          <input class="input is-primary" type="text" 
-                 ng-model="studentDetail.student.firstName"
-                 required>
+          <input class="input is-primary" type="text" ng-model="studentDetail.student.firstName" required>
         </div>
         <div class="control">
           <label class="label">Last Name</label>
-          <input class="input is-primary" type="text" 
-                 ng-model="studentDetail.student.lastName"
-                 required>
+          <input class="input is-primary" type="text" ng-model="studentDetail.student.lastName" required>
         </div>
         <div class="control">
           <label class="label">Email Address</label>
-          <input class="input is-primary" type="text" 
-                 ng-model="studentDetail.student.emailAddress"
-                 required>
+          <input class="input is-primary" type="text" ng-model="studentDetail.student.emailAddress" required>
         </div>
         <div class="control">
           <label class="label">Telephone</label>
-          <input class="input is-primary" type="text" 
-                 ng-model="studentDetail.student.telephone"
-                 required>
+          <input class="input is-primary" type="text" ng-model="studentDetail.student.telephone" required>
         </div>
         <div class="control">
           <button type="submit" class="button is-primary is-pulled-right">
@@ -58,25 +52,24 @@
       <br>
     </div>
   </div>
-
   <!-- List of Assignment Tile -->
   <div class="tile is-parent">
     <div class="tile is-child box">
       <p class="title">Assignments</p>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Grade</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="assignment in studentDetail.student.assignments">
-              <td>{{assignment.projects.name}}</td>
-              <td>F+</td>
-            </tr>
-          </tbody>
-        </table>
+      <table class="table is-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="assignment in studentDetail.student.assignments">
+            <td>{{assignment.projects.name}}</td>
+            <td>F+</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

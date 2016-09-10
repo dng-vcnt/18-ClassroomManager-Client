@@ -7,13 +7,14 @@
 
     StudentDetailController.$inject = [
                                         '$stateParams', 
+                                        'assignmentFactory',
                                         'studentFactory',
                                         'projectFactory',
                                         'toastr'
                                       ];
 
     /* @ngInject */
-    function StudentDetailController($stateParams, studentFactory, projectFactory, toastr) {
+    function StudentDetailController($stateParams, assignmentFactory, studentFactory, projectFactory, toastr) {
         var vm = this;
         vm.title = 'StudentDetailController';
 
@@ -23,6 +24,7 @@
         vm.studentId = $stateParams.studentId;
 
         // functions
+        vm.assignProject = assignProject;
         vm.getProjectsList = getProjectsList;
         vm.getStudentById = getStudentById;
         vm.saveStudent = saveStudent;
@@ -39,6 +41,21 @@
             if (typeof vm.studentId !== 'undefined') {
                 getStudentById(vm.studentId);
             }
+        }
+
+        function assignProject(projectId, studentId) {
+            if (!projectId || !studentId) {     
+                return 0;
+            }
+            assignmentFactory.assign(projectId, studentId).then (
+                function(data) {
+                    toastr.success("Successfully assigned project");
+                },
+                function(error) {
+                    toastr.error(error.status, error.statusText);
+                    console.log(error);
+                }
+            );
         }
 
         function getProjectsList() {

@@ -1,39 +1,62 @@
 <div class="tile is-ancestor">
   <div class="tile is-4 is-vertical is-parent">
+
+    <!-- Assign a student tile -->
     <div class="tile is-child notification is-primary box">
       <p class="title">Assign this project</p>
         <div class="control is-grouped">
           <div class="control">
             <span class="select">
-  					 	<select>
-  					 		<option>Student Name Name</option>
+  					 	<select ng-model="studentToAssignId">
+  					 		<option value="">Students...</option>
+                <option ng-repeat="student in projectDetail.studentsList"
+                        value="{{student.studentId}}">
+                  {{student.firstName}} {{student.lastName}}
+                </option>
   					 	</select>
 					  </span>
           </div>
           <div class="control">
-            <a class="button is-white is-outlined">Assign</a>
+            <button class="button is-white is-outlined"
+                    ng-click="projectDetail.assignStudent(projectDetail.project.projectId,
+                                                          studentToAssignId)">
+              Assign
+            </button>
           </div>
         </div>
     </div>
+
+    <!-- Edit project details tile -->
     <div class="tile is-child box">
       <p class="title">Edit Project</p>
-      <div class="control">
-        <label class="label">Name</label>
-        <input class="input is-primary" type="text">
-      </div>
-      <div class="control">
-        <label class="label">Description</label>
-        <textarea class="textarea is-primary" type="text"></textarea>
-      </div>
-      <div class="control">
-        <button class="button is-primary is-pulled-right">Save</button>
-      </div>
+      <form ng-submit="projectDetail.saveUpdate(projectDetail.project)">
+        <div class="control">
+          <label class="label">Name</label>
+          <input class="input is-primary" type="text" 
+                 ng-model="projectDetail.project.name"
+                 required>
+        </div>
+        <div class="control">
+          <label class="label">Description</label>
+          <textarea class="textarea is-primary" type="text" 
+                    ng-model="projectDetail.project.description"></textarea>
+        </div>
+        <div class="control">
+          <button class="button is-primary is-pulled-right"
+                  type="submit">
+            Save
+          </button>
+          <br>
+        </div>
+      </form>
     </div>
   </div>
+
+  <!-- List of students assigned to project tile -->
   <div class="tile is-parent">
     <div class="tile is-child box">
       <p class="title">Assigned To</p>
-        <table class="table">
+        <table class="table is-striped">
           <thead>
             <tr>
               <th>Name</th>
@@ -41,8 +64,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Student Name</td>
+            <tr ng-repeat="assignedTo in projectDetail.project.assignments">
+              <td>{{assignedTo.students.firstName}} {{assignedTo.students.lastName}}</td>
               <td>F+</td>
             </tr>
           </tbody>
