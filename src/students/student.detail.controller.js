@@ -19,6 +19,7 @@
         vm.title = 'StudentDetailController';
 
         // variables
+        vm.hide = false;
         vm.projectsList;
         vm.student; 
         vm.studentId = $stateParams.studentId;
@@ -40,6 +41,10 @@
 
             if (typeof vm.studentId !== 'undefined') {
                 getStudentById(vm.studentId);
+                vm.hide = false;
+            }
+            else {
+                vm.hide = true;
             }
         }
 

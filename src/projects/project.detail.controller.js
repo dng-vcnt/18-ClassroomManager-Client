@@ -19,6 +19,7 @@
         vm.title = 'ProjectDetailController';
 
         // variables
+        vm.hide = false;
         vm.project;
         vm.projectId = $stateParams.projectId;
         vm.studentsList;
@@ -26,6 +27,7 @@
 
         //functions
         vm.assignStudent = assignStudent;
+        vm.getStudentById = getStudentById;
         vm.getStudentsList = getStudentsList;
         vm.getProjectById = getProjectById;
         vm.saveProject = saveProject;
@@ -41,6 +43,10 @@
 
             if (typeof vm.projectId !== 'undefined') {
                 getProjectById(vm.projectId);
+                vm.hide = false;
+            }
+            else {
+                vm.hide = true;
             }
 
         }
@@ -53,6 +59,22 @@
             assignmentFactory.assign(projectId, studentId).then (
                 function(data) {
                     toastr.success("Successfully assigned project");
+                    console.log(data);
+                    var student = getStudentById(data.studentId);
+                    console.log(student);
+                    // vm.project.assignments.push(data);
+                },
+                function(error) {
+                    toastr.error(error.status, error.statusText);
+                    console.log(error);
+                }
+            );
+        }
+
+        function getStudentById(studentId) {
+            studentFactory.getStudentById(studentId).then (
+                function(data) {
+                    return data;
                 },
                 function(error) {
                     toastr.error(error.status, error.statusText);
